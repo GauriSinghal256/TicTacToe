@@ -42,6 +42,7 @@ const checkWinner = ()=>{
             if(pos1val===pos2val && pos2val===pos3val){
                 console.log("winner" , pos1val);
                 showWinner(pos1val);
+                return true;
             }
         }
     }
@@ -58,11 +59,11 @@ boxes.forEach((box)=>{
             turnO=true;
         }
         box.disabled=true;
-        if(count==9){
+        let isWinner = checkWinner();
+        if(count==9 && !isWinner){
             msg.innerText = `Draw - Click the reset buttton `;
             msgContainer.classList.remove("hide");
         }
-        checkWinner();
 
     });
 } );
