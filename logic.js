@@ -4,6 +4,7 @@ let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
 let newgameBtn = document.querySelector("#new-btn");
 
+
 let turnO = true;
 let winningPatterns =[[0,1,2] , [3,4,5] , [6,7,8] , [0,3,6] ,[1,4,7] ,[2,5,8] , [0,4,8] ,[2,4,6]];
 
@@ -14,6 +15,7 @@ const enableBoxes =()=>{
     }
 }
 const resetGame = ()=>{
+    count=0;
     turnO = true;
     enableBoxes();
     msgContainer.classList.add("hide");
@@ -44,9 +46,10 @@ const checkWinner = ()=>{
         }
     }
 }
+let count=0;
 boxes.forEach((box)=>{
     box.addEventListener("click" , ()=>{
-        console.log("box was clicked");
+        count=count+1;
         if(turnO){
             box.innerText="O";
             turnO=false;
@@ -55,6 +58,11 @@ boxes.forEach((box)=>{
             turnO=true;
         }
         box.disabled=true;
+        if(count==9){
+            msg.innerText = `Draw - Click the reset buttton `;
+            msgContainer.classList.remove("hide");
+        }
         checkWinner();
+
     });
 } );
